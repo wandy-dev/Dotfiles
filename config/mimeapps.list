@@ -1,0 +1,24 @@
+[Default Applications]
+text/html=/usr/local/bin/qutebrowser/qutebrowser.sh
+x-scheme-handler/http=/usr/local/bin/qutebrowser/qutebrowser.sh
+x-scheme-handler/https=/usr/local/bin/qutebrowser/qutebrowser.sh
+x-scheme-handler/about=/usr/local/bin/qutebrowser/qutebrowser.sh
+x-scheme-handler/unknown=/usr/local/bin/qutebrowser/qutebrowser.sh
+image/jpeg=feh.desktop
+image/png=feh.desktop
+image/gif=feh.desktop
+image/tiff=feh.desktop
+image/bmp=feh.desktop
+image/x-icon=feh.desktop
+image/x-xpixmap=feh.desktop
+image/x-xbitmap=feh.desktop
+
+[Added Associations]
+image/png=feh.desktop;
+image/gif=feh.desktop;
+image/tiff=feh.desktop;
+image/bmp=feh.desktop;
+image/x-icon=feh.desktop;
+image/x-xpixmap=feh.desktop;
+image/x-xbitmap=feh.desktop;
+application/vnd.debian.binary-package=gnome-software-local-file.desktop;

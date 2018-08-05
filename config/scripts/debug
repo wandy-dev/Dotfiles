@@ -1,0 +1,17 @@
+#!/bin/bash
+
+debug() {
+  DIR="${0}"
+
+  grep -nC 5 '^\s*debug' $DIR
+  CMD=""
+  while [[ $CMD != "exit" ]]; do
+      read -p "> " CMD
+      case $CMD in
+          vars ) ( set -o posix ; set );;
+          exit ) ;;
+          * ) eval $CMD;;
+      esac
+  done
+  echo "#############|  End of DEBUG mode |####################";
+}

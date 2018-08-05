@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/home/andy/.config/polybar'
+let g:netrw_dirhist_2='/usr/local/bin/qutebrowser/qutebrowser'
+let g:netrw_dirhist_3='/home/andy/.config/ranger'
+let g:netrw_dirhist_4='/usr'
+let g:netrw_dirhist_5='/usr/lib'
+let g:netrw_dirhist_6='/usr'
+let g:netrw_dirhist_7='/usr/lib/urxvt/perl'
+let g:netrw_dirhist_8='/home/andy'
+let g:netrw_dirhist_9='/home/andy/.config'

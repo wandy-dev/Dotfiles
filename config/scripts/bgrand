@@ -1,0 +1,6 @@
+#!/bin/bash
+ls ~/Wallpapers |sort -R |tail -n1 |while read file; do
+	feh --bg-fill ~/Wallpapers/"$file" &> /dev/null \
+    && cp ~/Wallpapers/"$file" ~/.config/wall.png &> /dev/null
+  echo $file
+done

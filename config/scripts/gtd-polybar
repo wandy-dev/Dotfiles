@@ -1,0 +1,8 @@
+#!/bin/bash
+
+FILE=/tmp/gtd
+if [[ -f $FILE ]] ; then
+	cat $FILE
+else
+	false
+fi

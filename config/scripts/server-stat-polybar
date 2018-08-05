@@ -1,0 +1,9 @@
+#!/bin/bash
+~/.config/scripts/server-stat &>/dev/null
+
+FILE=/tmp/server-stat.dat
+if [[ -f $FILE ]] ; then
+	cat $FILE
+else
+	false
+fi

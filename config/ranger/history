@@ -1,0 +1,50 @@
+cd 
+cd .
+search blis
+search doc
+search ncm
+search con
+open_with m
+w
+wq
+shell mdpdf LICENSE
+shell mdpdf README.md
+
+shell mdpdf luke_mutt_readme.md
+shell mdpdf pic.jpg
+open_with 
+open_with 11
+rename Elders Mill Time Lapse_424.jpg
+find 
+open_with 0
+search ruby
+search cheese
+q
+search env
+open_with vim
+search var
+search redis
+search usr
+search loc
+search n
+open_with feh
+search epos
+search epo
+search net
+search sign
+search job
+search jobs
+search demo
+search tmp
+search scir
+search scr
+search conf
+search scree
+delete
+search drop
+rename poodr.pdf
+search md
+rename mdpdf_
+search config
+search sc
+search short
