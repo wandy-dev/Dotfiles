@@ -1,0 +1,14 @@
+#!/bin/bash
+output=$(mpc -f "%title%\n%artist%\n%album%\n%file%")
+if [ $? -eq 1 ]
+then
+  sleep 5
+else
+  i=1
+  while read -r line; do
+    array[$i]="$line"
+    (( i++ ))
+  done <<< "$output"
+
+  notify-send "${array[1]}" "${array[2]} - ${array[3]}" -t 5000
+fi

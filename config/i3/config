@@ -1,0 +1,297 @@
+###### BASIC DEFINITIONS ######
+set $mod Mod4
+set $term st
+gaps inner 20
+gaps outer 15
+font pango:monospace 8
+floating_modifier $mod
+set $displayMode "Set display mode [w]ork [l]aptop [s]reenshare"
+set $lightMode "lights [l]iving room [k]itchen"
+
+###### COLORS ######
+client.focused           $rd     $rd     $rd  $rd       $rd
+#client.focused_inactive $bg     $bg     $fg  $bg       $bg
+#client.unfocused        $bg     $bg     $fg  $bg       $bg
+#client.urgent           $bg     $bg     $fg  $bg       $bg
+#client.placeholder      $bg     $bg     $fg  $bg       $bg
+#client.background       $bg
+
+###### EXTERNAL SCRIPTS ######
+### startup scripts ###
+exec xrdb -load ~/.Xdefaults
+exec mopidy
+exec session-address.sh
+exec nm-applet
+exec xautolock -time 30 -locker '~/.config/scripts/i3lock.sh'
+exec $term -n tmux -e tmux
+exec $term -n qalc -e qalc
+exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
+exec --no-startup-id synclient TapButton1=1
+exec --no-startup-id compton --config ~/.config/compton/config
+exec --no-startup-id synclient HorizEdgeScroll=1 \
+                               VertEdgeScroll=1 \
+                               VertScrollDelta=-111
+exec --no-startup-id feh --bg-fill ~/.config/wall.png
+
+#exec wal -R
+exec --no-startup-id ~/.config/scripts/battery.sh -n
+exec_always $HOME/.config/polybar/launch.sh
+### keybinding scripts ###
+bindsym $mod+c exec --no-startup-id ~/.config/scripts/camtoggle.sh
+bindsym $mod+b exec /usr/local/bin/qutebrowser/qutebrowser.sh \
+                      --enable-webengine-inspector
+bindsym $mod+n exec $term -e nmtui
+bindsym $mod+x exec urxvt -e ranger
+bindsym $mod+m exec exec $term -e ncmpcpp
+bindsym $mod+Shift+m exec ~/.config/scripts/music-bar-toggle.sh
+bindsym $mod+Mod1+m exec ~/.config/scripts/mopidy-boot.sh
+bindsym Print exec scrot ~/Pictures/screenshots/%b%d::%H%M%S.png
+bindsym $mod+Print exec scrot -u ~/Pictures/screenshots/%b%d::%H%M%S.png
+bindsym $mod+Shift+p --release exec ~/.config/scripts/box-screen-shot
+bindsym $mod+Shift+Print exec ~/.config/scripts/screencast
+bindsym $mod+t exec $term -e ~/.config/scripts/gtd
+
+###### WINDOW CONFIGURATION ######
+### navigation ###
+bindsym $mod+Tab workspace back_and_forth
+bindsym $mod+Shift+Tab workspace next
+bindsym Mod1+Tab exec ~/.config/scripts/cycle.sh
+### class workspace assignment ###
+assign [title="Text"] 3
+assign [title="Environment"] 2
+assign [class="Slack"] 4
+assign [class="pipe"] fullscreen enable
+
+bindsym $mod+Shift+x exec ~/.config/scripts/i3lock.sh
+
+# start a terminal
+bindsym $mod+Return exec $term
+bindsym $mod+Shift+Return exec $term -e tmux
+
+# kill focused window
+bindsym $mod+q kill
+bindsym $mod+Shift+q xdotool getwindowfocus windowkill
+# start dmenu (a program launcher)
+
+bindsym $mod+p exec sh ~/.config/scripts/rofi.sh run
+bindsym $mod+grave exec sh ~/.config/scripts/rofi.sh window
+# There also is the (new) i3-dmenu-desktop which only displays applications
+
+# There also is the (new) i3-dmenu-desktop which only displays applications
+# shipping a .desktop file. It is a wrapper around dmenu, so you need that
+# installed.
+bindsym $mod+semicolon exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -b -i -l 10 -p : -fn 'Ttyp0-14' -nb \#101012 -sb \#66AABB -sf \#101012'
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+
+# move focused window
+bindsym $mod+Shift+h move left 30
+bindsym $mod+Shift+j move down 30
+bindsym $mod+Shift+k move up 30
+bindsym $mod+Shift+l move right 30
+
+# split in horizontal orientation
+bindsym $mod+backslash split h
+
+# split in vertical orientation
+bindsym $mod+minus split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+for_window [class="mpv"] floating enable
+for_window [class="mpv"] sticky enable
+
+bindsym $mod+v floating enable; resize set 715 405; move position center
+
+bindsym $mod+u [instance="qalc"] scratchpad show; \
+               [instance="qalc"] move position center
+for_window [instance="qalc"] floating enable
+for_window [instance="qalc"] resize set 715 405
+for_window [instance="qalc"] move scratchpad
+for_window [instance="qalc"] border pixel 5
+
+bindsym $mod+Shift+s [instance="tmux"] scratchpad show; \
+                     [instance="tmux"] move position center
+for_window [instance="tmux"] floating enable
+for_window [instance="tmux"] resize set 1530 803
+for_window [instance="tmux"] move scratchpad
+for_window [instance="tmux"] border pixel 5
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws0 "10"
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws0
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws0
+
+# reload the configuration file
+bindsym $mod+Shift+c exec hero -n
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec i3-msg exit
+
+# resize window (you can also use the mouse for that)
+
+# Pressing left will shrink the window’s width.
+# Pressing right will grow the window’s width.
+# Pressing up will shrink the window’s height.
+# Pressing down will grow the window’s height.
+
+bindsym $mod+Shift+y resize shrink width 30 px or 30 ppt
+bindsym $mod+Shift+u resize grow height 30 px or 30 ppt
+bindsym $mod+Shift+i resize shrink height 30 px or 30 ppt
+bindsym $mod+Shift+o resize grow width 30 px or 30 ppt
+
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+
+# Remove blue window bar i3 uses
+for_window [class="^.*"] border pixel 1
+
+# Gaps
+bindsym $mod+Shift+greater gaps inner current plus 5
+bindsym $mod+Shift+less    gaps inner current minus 5
+bindsym $mod+Shift+g       gaps inner current set 30
+bindsym $mod+Shift+d       gaps inner current set 0; gaps outer current set 0
+
+# Background image
+
+bindsym XF86TouchpadToggle exec ~/.config/scripts/toggletouchpad.sh
+# Volume Controls
+bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
+bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute
+bindsym XF86AudioMute        exec --no-startup-id \
+                                  pactl set-sink-mute 0 toggle
+
+
+# Screen brightness controls
+bindsym XF86MonBrightnessUp   exec xbacklight -inc 10
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10
+
+# Toolbox
+focus_follows_mouse no
+
+# Media player controls
+bindsym XF86AudioPlay exec mpc toggle
+bindsym XF86AudioStop exec mpc stop
+bindsym XF86AudioNext exec mpc next
+bindsym XF86AudioPrev exec mpc prev
+
+bindsym Mod1+d mode $displayMode
+mode $displayMode {
+    bindsym w exec "\
+                ~/.screenlayout/work.sh && \
+                ~/.screenlayout/work-bar.sh"; \
+                mode "default"
+    bindsym s exec "\
+                ~/.screenlayout/screenshare.sh"; \
+                mode "default"
+    bindsym l exec "\
+                ~/.screenlayout/laptop.sh"; \
+                mode "default"
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+# hue lights integration
+mode $lightMode {
+  bindsym Shift+k mode "kitchen lights"
+  bindsym Shift+l mode "livingroom lights"
+
+  bindsym k exec "hue lights all +5"
+  bindsym j exec "hue lights all -30"
+  bindsym o exec "hue lights on"
+  bindsym Shift+o exec "hue lights off"
+
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+mode "kitchen lights" {
+  bindsym k exec "hue lights 1,2,3,4 +5"
+  bindsym j exec "hue lights 1,2,3,4 -30"
+  bindsym o exec "hue lights 1,2,3,4 on"
+  bindsym Shift+o exec "hue lights 1,2,3,4 off"
+
+  bindsym Return mode $lightMode
+  bindsym Escape mode $lightMode
+}
+
+mode "livingroom lights" {
+  bindsym k exec "hue lights 5 +5"
+  bindsym j exec "hue lights 5 -30"
+  bindsym o exec "hue lights 5 on"
+  bindsym Shift+o exec "hue lights 5 off"
+
+  bindsym Return mode $lightMode
+  bindsym Escape mode $lightMode
+}
+
+bindsym Mod1+l mode $lightMode
+
+#STOP/HIDE EVERYTHING:
+bindsym $mod+Shift+Delete workspace lmao ; exec google-chrome --incognito
+bindsym $mod+i exec $term -e vim ~/.config/i3/config

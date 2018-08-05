@@ -1,0 +1,44 @@
+body {
+	font-family: 'Open Sans'
+}
+
+h1 {
+	color: var(--color2);
+}
+
+.links {
+	font-size: 25px;
+	list-style: none;
+	padding-left: 0;
+}
+
+a{
+	color: var(--color6);
+	text-decoration: none;
+	padding: 0 15px;
+}
+
+body {
+	background-color: black;
+}
+
+.background-image {
+	position: fixed;
+	left: 0;
+	right: 0;
+	z-index: 1;
+	display: block;
+	width: 100%;
+	height: 100%;
+	filter: brightness(10%);
+}
+
+.content {
+	text-align: center;
+	position: fixed;
+	left: 0;
+	right: 0;
+	z-index: 9999;
+	margin-left: 20px;
+	margin-right: 20px;
+}
