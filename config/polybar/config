@@ -59,6 +59,7 @@ font-0 = "Ttyp0:pixelsize=14:antialias=false;1"
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 font-3 = "FontAwesome:pixelsize=9antialias=false;0"
+font-4 = "DejaVuSans:pixelsize=9antialias=false;0"
 
 modules-left = i3 server-status xwindow
 modules-right = recording filesystem xbacklight volume memory cpu wlan eth battery temperature date powermenu
@@ -107,6 +108,7 @@ font-0 = "Ttyp0:pixelsize=14:antialias=false;1"
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 font-3 = "FontAwesome:pixelsize=9;0"
+font-4 = "DejaVuSans:pixelsize=9antialias=false;0"
 
 modules-left = i3 xwindow
 modules-right = gtd server-status
@@ -156,6 +158,7 @@ font-0 = "Ttyp0:pixelsize=14:antialias=false;1"
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 font-3 = "FontAwesome:pixelsize=8;0"
+font-4 = "DejaVuSans:pixelsize=9antialias=false;0"
 
 modules-center = mpd
 
