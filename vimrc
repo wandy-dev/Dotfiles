@@ -78,6 +78,7 @@ autocmd BufWinLeave * call clearmatches()
 "---- Key bindings ----"
 nmap <C-f> :NERDTreeFind<CR>
 vnoremap <C-c> "*y :let @+=@*<CR>
+nnoremap <leader>cf :let @+=expand("%")<CR>
 
 "---- Vim Scripts ----"
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
