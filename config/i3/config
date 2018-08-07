@@ -26,7 +26,7 @@ client.focused           $rd     $rd     $rd  $rd       $rd
 ### startup scripts ###
 exec xrdb -load ~/.Xdefaults
 exec mopidy
-exec session-address.sh
+exec ~/.config/scripts/session-address.sh
 exec nm-applet
 exec xautolock -time 30 -locker '~/.config/scripts/i3lock.sh'
 exec $term -n tmux -e tmux
