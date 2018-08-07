@@ -1,0 +1,8 @@
+#!/bin/bash
+cd ~/Dotfiles
+
+gitstatus=$(git status | ag 'nothing to commit, working directory clean')
+
+if [[ -z $gitstatus ]]; then
+  exec /home/andy/bin/notify-all -u critical 'Commit your dots'
+fi
