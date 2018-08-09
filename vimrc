@@ -51,6 +51,7 @@ endif
 
 " ack
 nnoremap <leader>s :Ack
+nnoremap <leader>ms /def\s
 
 " calendar.vim
 let g:calendar_google_calendar = 1
