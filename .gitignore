@@ -1,2 +1,5 @@
 *.swp
 *.swo
+config/qutebrowser/qsettings/
+config/ranger/history
+config/ranger/bookmarks
