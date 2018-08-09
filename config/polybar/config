@@ -62,7 +62,7 @@ font-3 = "FontAwesome:pixelsize=9antialias=false;0"
 font-4 = "DejaVuSans:pixelsize=9antialias=false;0"
 
 modules-left = i3 server-status xwindow
-modules-right = recording filesystem xbacklight volume memory cpu wlan eth battery temperature date powermenu
+modules-right = gtd recording filesystem xbacklight volume memory cpu wlan eth battery temperature date powermenu
 
 tray-position = right
 tray-padding = 1
