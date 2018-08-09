@@ -87,6 +87,7 @@ if executable('ag')
 	let g:ackprg = 'ag --vimgrep'
 endif
 :noremap <leader>u :w<Home>silent <End> !urlview<CR>
+:noremap <leader>g :Goyo<CR>
 
 "---- View changes ----"
 " 80 column highlight
