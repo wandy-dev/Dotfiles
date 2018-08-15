@@ -9,6 +9,12 @@ set $mod Mod4
 set $term st
 gaps inner 20
 gaps outer 15
+workspace 3 gaps outer 0
+workspace 3 gaps inner 0
+workspace 4 gaps outer 0
+workspace 4 gaps inner 0
+workspace 5 gaps outer 0
+workspace 5 gaps inner 0
 font pango:monospace 8
 floating_modifier $mod
 set $displayMode "Set display mode [w]ork [l]aptop [s]reenshare"
