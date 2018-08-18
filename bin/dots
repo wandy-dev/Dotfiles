@@ -1,0 +1,70 @@
+#!/bin/bash
+
+# Display help
+usage() {
+cat << EOF
+	USAGE:
+		dots: dotfile repo manager
+
+		 dots [ -n ] add
+		 dots -n         : send notification
+		 dots add .vimrc : add .vimrc to dots repo
+
+	OPTIONS:
+
+		 -n : send notification to commit dotfiles
+
+	COMMANDS:
+
+		 add : add file to dots repo
+
+EOF
+}
+
+notify() {
+  cd ~/Dotfiles
+
+  gitstatus=$(git status | ag 'nothing to commit, working directory clean')
+
+  if [[ -z $gitstatus ]]; then
+    exec /home/andy/bin/notify-all -u critical 'Commit your dots'
+  fi
+	exit 0
+}
+
+add() {
+  name_hidden="$1"
+  name_visible=$(echo $name_hidden | sed s/\.//)
+  path_visible=~/Dotfiles/"$name_visible"
+  path_hidden=~/"$name_hidden"
+
+  rm -rf $path_visible
+  mv $path_hidden $path_visible
+  ln -s $path_visible $path_hidden
+	exit 0
+}
+
+# Set flag options
+while getopts "nh" opt; do
+   case "$opt" in
+      n) notify && exit 0;;
+      h) usage && exit 0;;
+      *) error "Invalid flag.";;
+   esac
+done 2>/dev/null
+shift "$((OPTIND-1))"
+
+command=$1
+case $command in
+	*)
+		shift
+		${command} $@
+		if [ $? = 127 ]; then
+			echo "Error: '$command' is not a known command." >&2
+			echo "       Run '$ProgName --help' for a list of known commands." >&2
+			exit 1
+		fi
+		;;
+esac
+
+usage && exit 0
