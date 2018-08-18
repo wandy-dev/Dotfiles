@@ -9,12 +9,12 @@ filetype off                  " required
 
 "---- Plugins ----"
 set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/.fzf
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
-Plugin 'kien/ctrlp.vim'
 Plugin 'godlygeek/tabular'
 Plugin 'scrooloose/nerdtree'
 Plugin 'dylanaraps/wal.vim'
@@ -27,6 +27,7 @@ Plugin 'vim-ruby/vim-ruby'
 Plugin 'chrisbra/colorizer'
 Plugin 'evandotpro/nerdtree-chmod'
 Plugin 'itchyny/calendar.vim'
+Plugin 'junegunn/fzf.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -77,6 +78,7 @@ autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
 "---- Key bindings ----"
+nmap <C-p> :FZF<CR>
 nmap <C-f> :NERDTreeFind<CR>
 vnoremap <C-c> "*y :let @+=@*<CR>
 nnoremap <leader>cf :let @+=expand("%")<CR>

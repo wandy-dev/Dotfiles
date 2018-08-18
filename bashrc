@@ -1,3 +1,12 @@
+##################################
+#  _               _
+# | |__   __ _ ___| |__  _ __ ___
+# | '_ \ / _` / __| '_ \| '__/ __|
+# | |_) | (_| \__ \ | | | | | (__
+# |_.__/ \__,_|___/_| |_|_|  \___|
+#
+##################################
+
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -147,3 +156,5 @@ export LDFLAGS="-L/opt/vc/lib"
 export PREFIX="$RUBY_BUILD_TOOL_LOCAL"
 export PS1="\[\033[32m\][\W]\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
 eval "$(rbenv init -)"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
