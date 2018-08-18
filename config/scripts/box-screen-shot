@@ -1,2 +1,2 @@
 #!/bin/bash
-import -silent "~/Pictures/screenshots/$(date '+%Y-%m-%d-%T')-screenshot.png"
+import -silent ~/Pictures/screenshots/$(date '+%Y-%m-%d-%T')-screenshot.png
