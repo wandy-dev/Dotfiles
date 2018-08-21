@@ -28,6 +28,7 @@ Plugin 'chrisbra/colorizer'
 Plugin 'evandotpro/nerdtree-chmod'
 Plugin 'itchyny/calendar.vim'
 Plugin 'junegunn/fzf.vim'
+Plugin 'zyedidia/vim-snake'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -57,6 +58,11 @@ nnoremap <leader>ms /def\s
 " calendar.vim
 let g:calendar_google_calendar = 1
 let g:calendar_google_task = 1
+
+" snake
+let g:snake_rows = 20
+let g:snake_cols = 50
+
 "---- Color scheme ----"
 colorscheme wal
 set t_Co=256
