@@ -29,6 +29,7 @@ Plugin 'evandotpro/nerdtree-chmod'
 Plugin 'itchyny/calendar.vim'
 Plugin 'junegunn/fzf.vim'
 Plugin 'zyedidia/vim-snake'
+Plugin 'atweiden/vim-dragvisuals'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -58,6 +59,16 @@ nnoremap <leader>ms /def\s
 " calendar.vim
 let g:calendar_google_calendar = 1
 let g:calendar_google_task = 1
+
+" drag
+runtime plugin/dragvisuals.vim
+vmap  <expr>  <LEFT>   DVB_Drag('left')
+vmap  <expr>  <DOWN>   DVB_Drag('down')
+vmap  <expr>  <UP>     DVB_Drag('up')
+vmap  <expr>  <RIGHT>  DVB_Drag('right')
+vmap  <expr>  D        DVB_Duplicate()
+" Remove any introduced trailing whitespace after moving
+let g:DVB_TrimWS = 1
 
 " snake
 let g:snake_rows = 20
