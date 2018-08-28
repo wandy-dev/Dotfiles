@@ -32,15 +32,41 @@ notify() {
 	exit 0
 }
 
-add() {
-  name_hidden="$1"
-  name_visible=$(echo $name_hidden | sed s/\.//)
-  path_visible=~/Dotfiles/"$name_visible"
-  path_hidden=~/"$name_hidden"
+dotify() {
+  if [[ $1 == .* ]]; then
+    echo $(echo $1 | sed s/\\.//)
+  else
+    echo '.'$1
+  fi
+}
 
-  rm -rf $path_visible
-  mv $path_hidden $path_visible
-  ln -s $path_visible $path_hidden
+sub_add() {
+  source_file="$1"
+  source_path=~/"$source_file"
+  mv_path=~/Dotfiles/$(dotify $source_file)
+
+  rm -rf $mv_path
+  mv $source_path $mv_path
+  ln -s $mv_path $source_path
+	exit 0
+}
+
+sub_rm() {
+  source_file="$1"
+  source_path=~/Dotfiles/"$source_file"
+  mv_path=~/$(dotify $source_file)
+
+  rm -rf $mv_path
+  mv $source_path $mv_path
+	exit 0
+}
+
+sub_install() {
+  source_file="$1"
+  mv_path=~/"$source_file"
+  source_path=~/Dotfiles/$(dotify $source_file)
+
+  ln -s $source_path $mv_path
 	exit 0
 }
 
@@ -58,7 +84,7 @@ command=$1
 case $command in
 	*)
 		shift
-		${command} $@
+		sub_${command} $@
 		if [ $? = 127 ]; then
 			echo "Error: '$command' is not a known command." >&2
 			echo "       Run '$ProgName --help' for a list of known commands." >&2
