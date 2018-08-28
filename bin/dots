@@ -2,21 +2,21 @@
 
 # Display help
 usage() {
-cat << EOF
-	USAGE:
-		dots: dotfile repo manager
+  cat << EOF
+  USAGE:
+    dots: dotfile repo manager
 
-		 dots [ -n ] add
-		 dots -n         : send notification
-		 dots add .vimrc : add .vimrc to dots repo
+     dots [ -n ] add
+     dots -n         : send notification
+     dots add .vimrc : add .vimrc to dots repo
 
-	OPTIONS:
+  OPTIONS:
 
-		 -n : send notification to commit dotfiles
+     -n : send notification to commit dotfiles
 
-	COMMANDS:
+  COMMANDS:
 
-		 add : add file to dots repo
+     add : add file to dots repo
 
 EOF
 }
@@ -29,7 +29,7 @@ notify() {
   if [[ -z $gitstatus ]]; then
     exec /home/andy/bin/notify-all -u critical 'Commit your dots'
   fi
-	exit 0
+  exit 0
 }
 
 dotify() {
@@ -48,7 +48,7 @@ sub_add() {
   rm -rf $mv_path
   mv $source_path $mv_path
   ln -s $mv_path $source_path
-	exit 0
+  exit 0
 }
 
 sub_rm() {
@@ -58,7 +58,7 @@ sub_rm() {
 
   rm -rf $mv_path
   mv $source_path $mv_path
-	exit 0
+  exit 0
 }
 
 sub_install() {
@@ -67,30 +67,30 @@ sub_install() {
   source_path=~/Dotfiles/$(dotify $source_file)
 
   ln -s $source_path $mv_path
-	exit 0
+  exit 0
 }
 
 # Set flag options
 while getopts "nh" opt; do
-   case "$opt" in
-      n) notify && exit 0;;
-      h) usage && exit 0;;
-      *) error "Invalid flag.";;
-   esac
+  case "$opt" in
+    n) notify && exit 0;;
+    h) usage && exit 0;;
+    *) error "Invalid flag.";;
+  esac
 done 2>/dev/null
 shift "$((OPTIND-1))"
 
 command=$1
 case $command in
-	*)
-		shift
-		sub_${command} $@
-		if [ $? = 127 ]; then
-			echo "Error: '$command' is not a known command." >&2
-			echo "       Run '$ProgName --help' for a list of known commands." >&2
-			exit 1
-		fi
-		;;
+  *)
+    shift
+    sub_${command} $@
+    if [ $? = 127 ]; then
+      echo "Error: '$command' is not a known command." >&2
+      echo "       Run '$ProgName --help' for a list of known commands." >&2
+      exit 1
+    fi
+    ;;
 esac
 
 usage && exit 0
