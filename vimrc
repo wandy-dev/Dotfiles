@@ -10,6 +10,7 @@ filetype off                  " required
 "---- Plugins ----"
 set rtp+=~/.vim/bundle/Vundle.vim
 set rtp+=~/.fzf
+set rtp+=~/Vim/bundle/netrw-browse-xdg
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
@@ -37,6 +38,7 @@ filetype plugin indent on    " required
 "---- Plugin configs ----"
 " nerdtree
 map <C-n> :NERDTreeToggle<CR>
+
 " airline
 let g:airline_powerline_fonts = 0
 let g:airline_left_sep = ''
