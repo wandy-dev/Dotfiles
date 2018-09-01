@@ -13,7 +13,7 @@
 parse_git_branch() {
 	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
-source ~/.cache/wal/colors.sh
+#source ~/.cache/wal/colors.sh
 export color0_alpha="#22${color0/'#'}"
 set -o vi
 
@@ -109,10 +109,6 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
@@ -158,3 +154,13 @@ export PS1="\[\033[32m\][\W]\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
 eval "$(rbenv init -)"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+PATH="/home/andy/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/andy/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/andy/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/andy/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/andy/perl5"; export PERL_MM_OPT;
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
