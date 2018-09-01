@@ -31,6 +31,7 @@ Plugin 'itchyny/calendar.vim'
 Plugin 'junegunn/fzf.vim'
 Plugin 'zyedidia/vim-snake'
 Plugin 'atweiden/vim-dragvisuals'
+Plugin 'airblade/vim-gitgutter'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
