@@ -1,3 +1,4 @@
+# vi: ft=i3config
 # _ _____
 #(_)___ /_      ___ __ ___
 #| | |_ \ \ /\ / / '_ ` _ \
@@ -21,7 +22,12 @@ set $displayMode "Set display mode [w]ork [l]aptop [s]reenshare"
 set $lightMode "lights [l]iving room [k]itchen"
 
 ###### COLORS ######
-client.focused           $rd     $rd     $rd  $rd       $rd
+client.focused           #752d2d     #A54242     #ffffff  #A54242   $rd
+#client.focused_inactive  $rd     $rd     $rd  #A54242   $rd
+#client.unfocused         $rd     $rd     $rd  #A54242   $rd
+client.urgent            $rd     $rd     $rd  #A54242   $rd
+client.placeholder       $rd     $rd     $rd  #A54242   $rd
+#client.focused           $rd     $rd     $rd  #A54242   $rd
 #client.focused_inactive $bg     $bg     $fg  $bg       $bg
 #client.unfocused        $bg     $bg     $fg  $bg       $bg
 #client.urgent           $bg     $bg     $fg  $bg       $bg
@@ -31,9 +37,7 @@ client.focused           $rd     $rd     $rd  $rd       $rd
 ###### EXTERNAL SCRIPTS ######
 ### startup scripts ###
 exec xrdb -load ~/.Xdefaults
-exec mopidy
 exec ~/.config/scripts/session-address.sh
-exec nm-applet
 exec xautolock -time 30 -locker '~/.config/scripts/i3lock.sh'
 exec $term -n tmux -e tmux
 exec $term -n qalc -e qalc
@@ -62,6 +66,7 @@ bindsym $mod+Print exec scrot -u ~/Pictures/screenshots/%b%d::%H%M%S.png
 bindsym $mod+Shift+p --release exec ~/.config/scripts/box-screen-shot
 bindsym $mod+Shift+Print exec ~/.config/scripts/screencast
 bindsym $mod+t exec $term -e ~/.config/scripts/gtd
+bindsym $mod+Shift+w exec sxiv ~/Wallpapers -t
 
 ###### WINDOW CONFIGURATION ######
 ### navigation ###
@@ -85,14 +90,14 @@ bindsym $mod+q kill
 bindsym $mod+Shift+q xdotool getwindowfocus windowkill
 # start dmenu (a program launcher)
 
-bindsym $mod+p exec sh ~/.config/scripts/rofi.sh run
+bindsym $mod+p exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -b -i -l 10 -p : -fn 'Ttyp0-14' -nb \#101012 -sb \#66AABB -sf \#101012'
 bindsym $mod+grave exec sh ~/.config/scripts/rofi.sh window
 # There also is the (new) i3-dmenu-desktop which only displays applications
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-bindsym $mod+semicolon exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -b -i -l 10 -p : -fn 'Ttyp0-14' -nb \#101012 -sb \#66AABB -sf \#101012'
+bindsym $mod+semicolon exec sh ~/.config/scripts/rofi.sh run
 
 # change focus
 bindsym $mod+h focus left
@@ -125,6 +130,7 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 for_window [class="mpv"] floating enable
 for_window [class="mpv"] sticky enable
+for_window [class="Sxiv"] floating enable
 
 bindsym $mod+v floating enable; resize set 715 405; move position center
 
@@ -246,10 +252,18 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 focus_follows_mouse no
 
 # Media player controls
-bindsym XF86AudioPlay exec mpc toggle
-bindsym XF86AudioStop exec mpc stop
-bindsym XF86AudioNext exec mpc next
-bindsym XF86AudioPrev exec mpc prev
+# spotify controls
+# depends on https://gist.github.com/streetturtle/fa6258f3ff7b17747ee3
+bindsym XF86AudioPlay exec sp play
+bindsym XF86AudioStop exec sp stop
+bindsym XF86AudioNext exec sp next
+bindsym XF86AudioPrev exec sp prev
+
+# MPC controls
+#bindsym XF86AudioPlay exec mpc toggle
+#bindsym XF86AudioStop exec mpc stop
+#bindsym XF86AudioNext exec mpc next
+#bindsym XF86AudioPrev exec mpc prev
 
 bindsym Mod1+d mode $displayMode
 mode $displayMode {

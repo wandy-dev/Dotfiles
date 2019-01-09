@@ -1,5 +1,4 @@
 #!/bin/bash
-alias cat=bat
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'

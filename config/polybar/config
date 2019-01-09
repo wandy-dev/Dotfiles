@@ -50,7 +50,7 @@ line-size = 3
 line-color = ${colors.primary}
 
 padding-left = 0
-padding-right = 1
+padding-right = 2
 
 module-margin-left = 1
 module-margin-right = 1
@@ -62,12 +62,13 @@ font-3 = "FontAwesome:pixelsize=9antialias=false;0"
 font-4 = "DejaVuSans:pixelsize=9antialias=false;0"
 
 modules-left = i3 server-status xwindow
-modules-right = gtd recording filesystem xbacklight volume memory cpu wlan eth battery temperature date powermenu
+modules-center = linux
+modules-right = gtd recording filesystem xbacklight volume weather memory cpu wlan eth battery temperature date
 
-tray-position = right
-tray-padding = 1
+;tray-position = right
+tray-padding = 4
 ;tray-transparent = true
-tray-background = ${colors.background}
+;tray-background = ${colors.background}
 
 ;wm-restack = bspwm
 ;wm-restack = i3
@@ -111,7 +112,8 @@ font-3 = "FontAwesome:pixelsize=9;0"
 font-4 = "DejaVuSans:pixelsize=9antialias=false;0"
 
 modules-left = i3 xwindow
-modules-right = gtd server-status
+modules-center = linux
+modules-right = gtd server-status date
 
 ;tray-position = right
 tray-padding = 2
@@ -160,7 +162,7 @@ font-2 = siji:pixelsize=10;1
 font-3 = "FontAwesome:pixelsize=8;0"
 font-4 = "DejaVuSans:pixelsize=9antialias=false;0"
 
-modules-center = mpd
+modules-center = spotify
 
 ;tray-position = right
 tray-padding = 2
@@ -596,9 +598,16 @@ interval = 1
 
 [module/server-status]
 type = custom/script
-label = %output%
+label = "%{A1:"$(pkill -9 -f puma)":}%output%%{A}"
 ;label-underline = ${colors.primary}
 exec = ~/.config/scripts/server-stat-polybar
+interval = 5
+
+[module/spotify]
+type = custom/script
+label = "%{A1:sp play:}%output%%{A}"
+;label-underline = ${colors.primary}
+exec = ~/.config/scripts/spotify-status
 interval = 5
 
 [module/recording]
@@ -610,8 +619,15 @@ interval = 5
 
 [module/linux]
 type = custom/script
-;label = 
+label = "%{A1:notify-send "$(figlet "$(hostname)")":}%output%%{A}"
 ;label-underline = ${colors.primary}
-exec = echo 
+exec = echo "$(whoami)@$(hostname)"
+
+[module/weather]
+type = custom/script
+interval = 900
+label = "%{A1:notify-send "$(curl wttr.in/Atlanta?0?q?T?u)":}%output%%{A}"
+format-prefix = " "
+exec = ~/.config/scripts/weather
 
 ; vim:ft=dosini

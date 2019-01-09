@@ -5,6 +5,7 @@
 "   \_/ |_|_| |_| |_|_|  \___|
 
 set nocompatible              " be iMproved, required
+set encoding=UTF-8
 filetype off                  " required
 
 "---- Plugins ----"
@@ -19,8 +20,8 @@ Plugin 'tpope/vim-surround'
 Plugin 'godlygeek/tabular'
 Plugin 'scrooloose/nerdtree'
 Plugin 'dylanaraps/wal.vim'
-Plugin 'mileszs/ack.vim'
 Plugin 'vim-airline/vim-airline'
+Plugin 'mileszs/ack.vim'
 Plugin 'junegunn/goyo.vim'
 Plugin 'noahfrederick/vim-noctu'
 Plugin 'tpope/vim-rails'
@@ -30,8 +31,14 @@ Plugin 'evandotpro/nerdtree-chmod'
 Plugin 'itchyny/calendar.vim'
 Plugin 'junegunn/fzf.vim'
 Plugin 'zyedidia/vim-snake'
-Plugin 'atweiden/vim-dragvisuals'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-rhubarb'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'ri-viewer'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-endwise'
+Plugin 'jremmen/vim-ripgrep'
+Plugin 'mboughaba/i3config.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -46,32 +53,26 @@ let g:airline_left_sep = ''
 let g:airline_right_sep = ''
 let g:airline_right_atl_sep = ''
 let g:airline_left_alt_sep = ''
+let g:fzf_files_options = '--preview "bat --theme="OneHalfDark" --style=numbers,changes --color always {2..-1}'
 
 " tabular
 if exists(":Tabularize")
-  nmap <Leader>a= :Tabularize /=<CR>
-  vmap <Leader>a= :Tabularize /=<CR>
-  nmap <Leader>a: :Tabularize /:\zs<CR>
-  vmap <Leader>a: :Tabularize /:\zs<CR>
+  nmap <Leader>t= :Tabularize /=<CR>
+  vmap <Leader>t= :Tabularize /=<CR>
+  nmap <Leader>t: :Tabularize /:\zs<CR>
+  vmap <Leader>t: :Tabularize /:\zs<CR>
 endif
 
 " ack
-nnoremap <leader>s :Ack
+nnoremap <leader>s :Ag
 nnoremap <leader>ms /def\s
+
+" ack
+nnoremap <leader>G :GitGutterToggle<CR>
 
 " calendar.vim
 let g:calendar_google_calendar = 1
 let g:calendar_google_task = 1
-
-" drag
-runtime plugin/dragvisuals.vim
-vmap  <expr>  <LEFT>   DVB_Drag('left')
-vmap  <expr>  <DOWN>   DVB_Drag('down')
-vmap  <expr>  <UP>     DVB_Drag('up')
-vmap  <expr>  <RIGHT>  DVB_Drag('right')
-vmap  <expr>  D        DVB_Duplicate()
-" Remove any introduced trailing whitespace after moving
-let g:DVB_TrimWS = 1
 
 " snake
 let g:snake_rows = 20
@@ -84,6 +85,7 @@ syntax on
 
 "---- Basic configs ----"
 set hlsearch
+set hidden
 set background=dark
 set expandtab tabstop=2 softtabstop=2 shiftwidth=2
 set smarttab
@@ -96,9 +98,11 @@ autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
+let mapleader=','
 
 "---- Key bindings ----"
 nmap <C-p> :FZF<CR>
+nmap ; :Buffers<CR>
 nmap <C-f> :NERDTreeFind<CR>
 vnoremap <C-c> "*y :let @+=@*<CR>
 nnoremap <leader>cf :let @+=expand("%")<CR>
@@ -121,6 +125,8 @@ endif
 function! ToggleRNU()
   :execute "set rnu!"
 endfunction
+
+command! Noh execute "noh"
 
 nmap <leader>n :call ToggleRNU()<CR>
 
@@ -149,3 +155,10 @@ function! LightlineFugitive()
     return ''
 endfunction
 :syntime on
+
+" ripgrep
+if executable('rg')
+  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
+  set grepprg=rg\ --vimgrep
+  command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+endif

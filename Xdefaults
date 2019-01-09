@@ -2,6 +2,7 @@
 !URxvt.font: xft:Dejavu Sans Mono:pixelsize=13:antialias=false
 URxvt.font: xft:Ttyp0:pixelsize=14:antialias=false
 !URxvt.font: *-fixed-*-*-*-14-*
+*.font: Ttyp0:pixelsize=14:antialias=true;
 URxvt.scrollBar:	false
 URxvt.cursorColor:	$color0
 URxvt.intensityStyles: true
@@ -42,8 +43,8 @@ st.intensityStyles: true
 *color6: #5E7175
 *color14:  #A3BABF
 !white
-*color7: #DDEEDD
-*color15:  #6C887A
+*color7: #e6e1dc
+*color15:  #e6e1dc
 
 !*.foreground:   #e6e1dc
 !*.background: #161616

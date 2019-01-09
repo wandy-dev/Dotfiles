@@ -1,13 +1,12 @@
 #!/usr/bin/env ruby
 
 api = system('netstat -pan | ag 0.0.0.0:5000 > /dev/null')
-rails = system('netstat -pan | ag 127.0.0.1:3000 > /dev/null')
-mopidy = system('netstat -pan | ag 127.0.0.1:6600 > /dev/null')
+rails = system('netstat -pan | ag 0.0.0.0:3000 > /dev/null')
+#mopidy = system('netstat -pan | ag 127.0.0.1:6600 > /dev/null')
 
 rails_status  = rails  ? '%{F#B7CE42}3000%{F-}' : '%{F#A54242}3000%{F-}'
 api_status 	  = api    ? '%{F#B7CE42}5000%{F-}' : '%{F#A54242}5000%{F-}'
-mopidy_status = mopidy ? '%{F#B7CE42}6600%{F-}' : '%{F#A54242}6600%{F-}'
 
-output = "servers: #{rails_status} #{api_status} #{mopidy_status}"
+output = "servers: #{rails_status} #{api_status}"
 
 system("echo '#{output}' > /tmp/server-stat.dat")

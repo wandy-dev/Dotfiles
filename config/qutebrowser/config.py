@@ -11,6 +11,8 @@
 # to be edited. * `{line}`: Line in which the caret is found in the
 # text. * `{column}`: Column in which the caret is found in the text. *
 # `{line0}`: Same as `{line}`, but starting from index 0. * `{column0}`:
+config.bind('gp', 'spawn --userscript qute-lastpass')
+config.bind('gL', 'spawn --userscript lpaccount')
 # Same as `{column}`, but starting from index 0.
 # Type: ShellCommand
 c.editor.command = ['urxvt', '-e', 'vim', '{}']
