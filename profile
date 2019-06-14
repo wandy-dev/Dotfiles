@@ -9,6 +9,7 @@
 #umask 022
 export EDITOR="vim"
 export TERMINAL="st"
+export TERM="st"
 export BROWSER="qutebrowser"
 
 # if running bash

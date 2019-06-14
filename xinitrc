@@ -1,2 +1,7 @@
 PATH=$PATH
-exec i3
+compton &
+slstatus &
+sxhkd &
+xrdb -load /home/andy/.Xdefaults
+feh --bg-fill ~/.config/wall.png
+exec dbus-launch dwm

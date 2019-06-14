@@ -153,7 +153,8 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
 export CPATH="/opt/vc/include"
 export GOPATH=$HOME/.go
-export PATH="$HOME/.go/bin:$PATH"
+export GOBIN=$GOPATH/bin
+export PATH="$GOPATH:$GOBIN:$PATH"
 export LDFLAGS="-L/opt/vc/lib"
 export PREFIX="$RUBY_BUILD_TOOL_LOCAL"
 export PS1="\[\033[32m\][\W]\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
@@ -179,3 +180,7 @@ eval "$(rbenv init -)"
 export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
 
 eval $(thefuck --alias)
+
+[ -s ~/.luaver/luaver ] && . ~/.luaver/luaver
+[ -s ~/.luaver/completions/luaver.bash ] && . ~/.luaver/completions/luaver.bash
+
