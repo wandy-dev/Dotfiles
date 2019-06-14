@@ -4,7 +4,6 @@ URxvt.font: xft:Ttyp0:pixelsize=14:antialias=false
 !URxvt.font: *-fixed-*-*-*-14-*
 *.font: Ttyp0:pixelsize=14:antialias=true;
 URxvt.scrollBar:	false
-URxvt.cursorColor:	$color0
 URxvt.intensityStyles: true
 URxvt.background:  #101012
 
@@ -17,13 +16,13 @@ st.intensityStyles: true
 !URxvt.shading: 10
 *.cursorColor: #FDA53C
 
-*foreground:  #ebebeb
-*background:  #101012
+*.foreground:  #ebebeb
+*.background:  #101012
 *backgroundtransparent:  #dd101012
 
 !black
-*color0: #101012
-*color8: #4d4d4d
+*.color0: #4d4d4d
+*.color8: #4d4d4d
 !red
 *color1: #A54242
 *color9: #CC6666
@@ -45,6 +44,8 @@ st.intensityStyles: true
 !white
 *color7: #e6e1dc
 *color15:  #e6e1dc
+
+*.color232:  #101012
 
 !*.foreground:   #e6e1dc
 !*.background: #161616
