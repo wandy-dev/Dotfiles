@@ -605,7 +605,7 @@ interval = 5
 type = custom/script
 label = "%output%"
 ;label-underline = ${colors.primary}
-exec = ~/bin/sem-status
+exec = ~/.config/scripts/sem-status
 interval = 5
 
 [module/spotify]

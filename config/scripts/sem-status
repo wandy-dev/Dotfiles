@@ -1,0 +1,37 @@
+#!/bin/bash
+retrieve_status() {
+  current_branch=$(git rev-parse --abbrev-ref HEAD)
+  workflow_id=$(sem get workflows | ag $current_branch | head -n 1 | awk '{ print $1 }')
+  sem get workflow $workflow_id | tail -n 1 | awk '{ print $6 }'
+}
+
+cd /home/andy/Repos/webdev/groundfloor_api
+api=$(retrieve_status)
+cd - > /dev/null
+
+cd /home/andy/Repos/webdev/groundfloor_rails
+rails=$(retrieve_status)
+cd - > /dev/null
+
+if [ -z $api ]; then
+  api_status="%{F#B7CE42}DONE%{F-}"
+else
+  if [ $api = "DONE" ]; then
+    api_status="%{F#B7CE42}DONE%{F-}"
+  else
+    api_status="%{F#A54242}$api...%{F-}"
+  fi
+fi
+
+if [ -z $rails ]; then
+  rails_status="%{F#B7CE42}DONE%{F-}"
+else
+  if [ $rails = "DONE" ]; then
+    rails_status="%{F#B7CE42}DONE%{F-}"
+  else
+    rails_status="%{F#A54242}$rails...%{F-}"
+  fi
+fi
+
+
+echo "api: $api_status rails: $rails_status"
