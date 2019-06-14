@@ -14,6 +14,14 @@
 parse_git_branch() {
 	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
+
+cop() {
+	bundle exec rubocop $1
+}
+
+rs() {
+	bundle exec rspec $1
+}
 #source ~/.cache/wal/colors.sh
 export color0_alpha="#22${color0/'#'}"
 set -o vi
