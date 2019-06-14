@@ -2,11 +2,15 @@
 
 api = system('netstat -pan | ag 0.0.0.0:5000 > /dev/null')
 rails = system('netstat -pan | ag 0.0.0.0:3000 > /dev/null')
+docker = system('netstat -pan | ag :8001 > /dev/null')
+resque = system('netstat -pan | ag 0.0.0.0:8282 > /dev/null')
 #mopidy = system('netstat -pan | ag 127.0.0.1:6600 > /dev/null')
 
 rails_status  = rails  ? '%{F#B7CE42}3000%{F-}' : '%{F#A54242}3000%{F-}'
 api_status 	  = api    ? '%{F#B7CE42}5000%{F-}' : '%{F#A54242}5000%{F-}'
+docker_status = docker ? '%{F#B7CE42}8001%{F-}' : '%{F#A54242}8001%{F-}'
+resque_status = resque ? '%{F#B7CE42}8282%{F-}' : '%{F#A54242}8282%{F-}'
 
-output = "servers: #{rails_status} #{api_status}"
+output = "servers: #{rails_status} #{api_status} #{docker_status} #{resque_status} "
 
 system("echo '#{output}' > /tmp/server-stat.dat")

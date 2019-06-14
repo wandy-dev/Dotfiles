@@ -62,8 +62,7 @@ font-3 = "FontAwesome:pixelsize=9antialias=false;0"
 font-4 = "DejaVuSans:pixelsize=9antialias=false;0"
 
 modules-left = i3 server-status xwindow
-modules-center = linux
-modules-right = gtd recording filesystem xbacklight volume weather memory cpu wlan eth battery temperature date
+modules-right = gtd recording filesystem xbacklight volume weather memory cpu wlan expressvpn eth battery temperature date
 
 ;tray-position = right
 tray-padding = 4
@@ -112,8 +111,7 @@ font-3 = "FontAwesome:pixelsize=9;0"
 font-4 = "DejaVuSans:pixelsize=9antialias=false;0"
 
 modules-left = i3 xwindow
-modules-center = linux
-modules-right = gtd server-status date
+modules-right = gtd build-status server-status date
 
 ;tray-position = right
 tray-padding = 2
@@ -333,7 +331,7 @@ ws-icon-6 = 6;
 ws-icon-7 = 7;
 ws-icon-8 = 8;
 ws-icon-9 = 9;
-ws-icon-0 = 10;
+ws-icon-0 = 10;
 ; Only show workspaces on the same output as the bar
 ;pin-workspaces = true
 
@@ -419,7 +417,7 @@ interval = 2
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground}
 format-underline = ${colors.color5}
-label = %percentage:2%%
+label = "%{A1:notify-send "$(~/.config/scripts/cpu-bar.sh)":}%percentage:2%%%{A}"
 
 [module/memory]
 type = internal/memory
@@ -603,6 +601,13 @@ label = "%{A1:"$(pkill -9 -f puma)":}%output%%{A}"
 exec = ~/.config/scripts/server-stat-polybar
 interval = 5
 
+[module/build-status]
+type = custom/script
+label = "%output%"
+;label-underline = ${colors.primary}
+exec = ~/bin/sem-status
+interval = 5
+
 [module/spotify]
 type = custom/script
 label = "%{A1:sp play:}%output%%{A}"
@@ -622,6 +627,14 @@ type = custom/script
 label = "%{A1:notify-send "$(figlet "$(hostname)")":}%output%%{A}"
 ;label-underline = ${colors.primary}
 exec = echo "$(whoami)@$(hostname)"
+
+[module/expressvpn]
+type = custom/script
+interval = 5
+label = "%{A1:notify-send "$(expressvpn status)":}%output%%{A}"
+format-prefix = " "
+exec = expressvpn status | head -n 1 | awk '{print $1}' | sed 's/Not/Unsecure/g' | sed 's/Connected/Secure/' | perl -pe 's/\e\[?.*?[\@-~]//g'
+format-underline = #55aa55
 
 [module/weather]
 type = custom/script
