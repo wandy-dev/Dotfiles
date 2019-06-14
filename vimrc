@@ -7,6 +7,7 @@
 set nocompatible              " be iMproved, required
 set encoding=UTF-8
 filetype off                  " required
+let mapleader=','
 
 "---- Plugins ----"
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -34,41 +35,58 @@ Plugin 'zyedidia/vim-snake'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-rhubarb'
 Plugin 'kchmck/vim-coffee-script'
-Plugin 'ri-viewer'
+Plugin 'danchoi/ri.vim'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-endwise'
 Plugin 'jremmen/vim-ripgrep'
 Plugin 'mboughaba/i3config.vim'
+Plugin 'thoughtbot/vim-rspec'
+Plugin 'posva/vim-vue'
+Plugin 'vim-syntastic/syntastic'
+Plugin 'jparise/vim-graphql'
+Plugin 'digitaltoad/vim-pug'
+Plugin 'tpope/vim-abolish'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
 
+map <Leader>p :set paste!<CR>
+
 "---- Plugin configs ----"
 " nerdtree
 map <C-n> :NERDTreeToggle<CR>
+let g:rspec_command = '!bundle exec rspec {spec}'
 
 " airline
+let g:syntastic_stl_format = "[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]"
 let g:airline_powerline_fonts = 0
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
 let g:airline_right_atl_sep = ''
 let g:airline_left_alt_sep = ''
-let g:fzf_files_options = '--preview "bat --theme="OneHalfDark" --style=numbers,changes --color always {2..-1}'
+let g:airline_theme = 'dark'
+let g:airline_section_z=''
 
 " tabular
 if exists(":Tabularize")
-  nmap <Leader>t= :Tabularize /=<CR>
-  vmap <Leader>t= :Tabularize /=<CR>
-  nmap <Leader>t: :Tabularize /:\zs<CR>
-  vmap <Leader>t: :Tabularize /:\zs<CR>
+  nmap <Leader>T= :Tabularize /=<CR>
+  vmap <Leader>T= :Tabularize /=<CR>
+  nmap <Leader>T: :Tabularize /:\zs<CR>
+  vmap <Leader>T: :Tabularize /:\zs<CR>
 endif
 
 " ack
 nnoremap <leader>s :Ag
 nnoremap <leader>ms /def\s
 
-" ack
-nnoremap <leader>G :GitGutterToggle<CR>
+" gitgutter
+let g:gitgutter_enabled = 0
+nnoremap <leader>g :GitGutterToggle<CR>
+
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
 
 " calendar.vim
 let g:calendar_google_calendar = 1
@@ -80,7 +98,7 @@ let g:snake_cols = 50
 
 "---- Color scheme ----"
 colorscheme wal
-set t_Co=256
+"set t_Co=256
 syntax on
 
 "---- Basic configs ----"
@@ -98,7 +116,6 @@ autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
-let mapleader=','
 
 "---- Key bindings ----"
 nmap <C-p> :FZF<CR>
@@ -113,7 +130,7 @@ if executable('ag')
 	let g:ackprg = 'ag --vimgrep'
 endif
 :noremap <leader>u :w<Home>silent <End> !urlview<CR>
-:noremap <leader>g :Goyo<CR>
+:noremap <leader>G :Goyo<CR>
 
 "---- View changes ----"
 " 80 column highlight
