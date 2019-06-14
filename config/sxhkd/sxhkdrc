@@ -1,0 +1,51 @@
+XF86Audio{Play,Stop,Prev,Next}
+	sp {play,stop,prev,next}
+
+XF86TouchpadToggle
+  ~/.config/scripts/toggletouchpad.sh
+
+XF86AudioRaiseVolume
+ ~/.config/scripts/volume.sh high
+
+XF86AudioLowerVolume
+ ~/.config/scripts/volume.sh low
+
+XF86AudioMute
+ ~/.config/scripts/volume.sh mute
+
+XF86MonBrightnessUp
+  xbacklight -inc 10
+
+XF86MonBrightnessDown
+  xbacklight -dec 10
+
+super + alt + x
+  /home/andy/.config/scripts/i3lock.sh
+
+super + n
+  exec st -e nmtui
+
+Print
+  scrot /home/andy/Pictures/screenshots/%b%d::%H%M%S.png
+
+super + Print
+  scrot -u /home/andy/Pictures/screenshots/%b%d::%H%M%S.png
+
+super + shift + p
+  /home/andy/.config/scripts/box-screen-shot
+
+super + shift + Print
+  /home/andy/.config/scripts/screencast
+
+super + shift + w
+  sxiv /home/andy/Wallpapers -t
+
+super + grave
+  /home/andy/bin/emoji
+
+F1
+  /home/andy/bin/qr-clip
+
+super + b
+  /usr/local/bin/qutebrowser/qutebrowser.sh --enable-webengine-inspector
+

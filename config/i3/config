@@ -14,12 +14,12 @@ workspace 3 gaps outer 0
 workspace 3 gaps inner 0
 workspace 4 gaps outer 0
 workspace 4 gaps inner 0
-workspace 5 gaps outer 0
-workspace 5 gaps inner 0
+#workspace 5 gaps outer 0
+#workspace 5 gaps inner 0
 font pango:monospace 8
 floating_modifier $mod
 set $displayMode "Set display mode [w]ork [l]aptop [s]reenshare"
-set $lightMode "lights [l]iving room [k]itchen"
+set $lightMode "lights [L]iving room [K]itchen"
 
 ###### COLORS ######
 client.focused           #752d2d     #A54242     #ffffff  #A54242   $rd
@@ -37,6 +37,8 @@ client.placeholder       $rd     $rd     $rd  #A54242   $rd
 ###### EXTERNAL SCRIPTS ######
 ### startup scripts ###
 exec xrdb -load ~/.Xdefaults
+exec sxhkd
+exec an2linuxserver.py
 exec ~/.config/scripts/session-address.sh
 exec xautolock -time 30 -locker '~/.config/scripts/i3lock.sh'
 exec $term -n tmux -e tmux
@@ -53,20 +55,15 @@ exec --no-startup-id feh --bg-fill ~/.config/wall.png
 exec --no-startup-id ~/.config/scripts/battery.sh -n
 exec_always $HOME/.config/polybar/launch.sh
 ### keybinding scripts ###
+bindsym $mod+Shift+m exec ~/.config/scripts/music-bar-toggle.sh
 bindsym $mod+c exec --no-startup-id ~/.config/scripts/camtoggle.sh
 bindsym $mod+b exec /usr/local/bin/qutebrowser/qutebrowser.sh \
                       --enable-webengine-inspector
-bindsym $mod+n exec $term -e nmtui
+bindsym $mod+Shift+b exec --no-startup-id /home/andy/bin/surfo /home/andy/.config/startpage/index.html
+#bindsym $mod+n exec $term -e nmtui
 bindsym $mod+x exec urxvt -e ranger
-bindsym $mod+m exec exec $term -e ncmpcpp
-bindsym $mod+Shift+m exec ~/.config/scripts/music-bar-toggle.sh
-bindsym $mod+Mod1+m exec ~/.config/scripts/mopidy-boot.sh
-bindsym Print exec scrot ~/Pictures/screenshots/%b%d::%H%M%S.png
-bindsym $mod+Print exec scrot -u ~/Pictures/screenshots/%b%d::%H%M%S.png
-bindsym $mod+Shift+p --release exec ~/.config/scripts/box-screen-shot
-bindsym $mod+Shift+Print exec ~/.config/scripts/screencast
+bindsym $mod+m exec sp feh
 bindsym $mod+t exec $term -e ~/.config/scripts/gtd
-bindsym $mod+Shift+w exec sxiv ~/Wallpapers -t
 
 ###### WINDOW CONFIGURATION ######
 ### navigation ###
@@ -76,8 +73,11 @@ bindsym Mod1+Tab exec ~/.config/scripts/cycle.sh
 ### class workspace assignment ###
 assign [title="Text"] 3
 assign [title="Environment"] 2
+assign [instance="crx_ofnenkbipokecifhaklmjdlhhjfjaoan"] 10
 assign [class="Slack"] 4
 assign [class="pipe"] fullscreen enable
+for_window [class="Spotify"] move to workspace 5
+for_window [class="feh"] floating enable
 
 bindsym $mod+Shift+x exec ~/.config/scripts/i3lock.sh
 
@@ -91,7 +91,7 @@ bindsym $mod+Shift+q xdotool getwindowfocus windowkill
 # start dmenu (a program launcher)
 
 bindsym $mod+p exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -b -i -l 10 -p : -fn 'Ttyp0-14' -nb \#101012 -sb \#66AABB -sf \#101012'
-bindsym $mod+grave exec sh ~/.config/scripts/rofi.sh window
+#bindsym $mod+grave exec sh ~/.config/scripts/rofi.sh window
 # There also is the (new) i3-dmenu-desktop which only displays applications
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
@@ -130,6 +130,8 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 for_window [class="mpv"] floating enable
 for_window [class="mpv"] sticky enable
+for_window [class="plexmediaplay"] floating enable
+for_window [class="plexmediaplay"] sticky enable
 for_window [class="Sxiv"] floating enable
 
 bindsym $mod+v floating enable; resize set 715 405; move position center
@@ -236,34 +238,8 @@ bindsym $mod+Shift+d       gaps inner current set 0; gaps outer current set 0
 
 # Background image
 
-bindsym XF86TouchpadToggle exec ~/.config/scripts/toggletouchpad.sh
-# Volume Controls
-bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
-bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute
-bindsym XF86AudioMute        exec --no-startup-id \
-                                  pactl set-sink-mute 0 toggle
-
-
-# Screen brightness controls
-bindsym XF86MonBrightnessUp   exec xbacklight -inc 10
-bindsym XF86MonBrightnessDown exec xbacklight -dec 10
-
 # Toolbox
 focus_follows_mouse no
-
-# Media player controls
-# spotify controls
-# depends on https://gist.github.com/streetturtle/fa6258f3ff7b17747ee3
-bindsym XF86AudioPlay exec sp play
-bindsym XF86AudioStop exec sp stop
-bindsym XF86AudioNext exec sp next
-bindsym XF86AudioPrev exec sp prev
-
-# MPC controls
-#bindsym XF86AudioPlay exec mpc toggle
-#bindsym XF86AudioStop exec mpc stop
-#bindsym XF86AudioNext exec mpc next
-#bindsym XF86AudioPrev exec mpc prev
 
 bindsym Mod1+d mode $displayMode
 mode $displayMode {
@@ -316,7 +292,7 @@ mode "livingroom lights" {
   bindsym Escape mode $lightMode
 }
 
-bindsym Mod1+l mode $lightMode
+bindsym Mod1+Shift+l mode $lightMode
 
 #STOP/HIDE EVERYTHING:
 bindsym $mod+Shift+Delete workspace lmao ; exec google-chrome --incognito
