@@ -47,5 +47,4 @@ F1
   /home/andy/bin/qr-clip
 
 super + b
-  /usr/local/bin/qutebrowser/qutebrowser.sh --enable-webengine-inspector
-
+  /usr/bin/qutebrowser --enable-webengine-inspector

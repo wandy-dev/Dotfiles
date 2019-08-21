@@ -22,6 +22,10 @@ cop() {
 rs() {
 	bundle exec rspec $1
 }
+
+db-reset() {
+  bundle exec rake db:drop db:create db:migrate
+}
 #source ~/.cache/wal/colors.sh
 export color0_alpha="#22${color0/'#'}"
 set -o vi

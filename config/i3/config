@@ -37,8 +37,9 @@ client.placeholder       $rd     $rd     $rd  #A54242   $rd
 ###### EXTERNAL SCRIPTS ######
 ### startup scripts ###
 exec xrdb -load ~/.Xdefaults
-exec sxhkd
+exec sxhkd -c ~/Dotfiles/config/sxhkd/sxhkdrc
 exec an2linuxserver.py
+exec /home/andy/bin/assistant/google-assistant
 exec ~/.config/scripts/session-address.sh
 exec xautolock -time 30 -locker '~/.config/scripts/i3lock.sh'
 exec $term -n tmux -e tmux
@@ -57,8 +58,6 @@ exec_always $HOME/.config/polybar/launch.sh
 ### keybinding scripts ###
 bindsym $mod+Shift+m exec ~/.config/scripts/music-bar-toggle.sh
 bindsym $mod+c exec --no-startup-id ~/.config/scripts/camtoggle.sh
-bindsym $mod+b exec /usr/local/bin/qutebrowser/qutebrowser.sh \
-                      --enable-webengine-inspector
 bindsym $mod+Shift+b exec --no-startup-id /home/andy/bin/surfo /home/andy/.config/startpage/index.html
 #bindsym $mod+n exec $term -e nmtui
 bindsym $mod+x exec urxvt -e ranger

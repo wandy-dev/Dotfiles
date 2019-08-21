@@ -49,6 +49,7 @@ c.url.default_page = '~/.config/startpage/index.html'
 # `:open google qutebrowser`.
 # Type: Dict
 c.url.searchengines = {
+  'aw': 'https://wiki.archlinux.org/index.php?search={}',
   'ghgf': 'https://github.com/groundfloorus/{}',
   'ghw': 'https://github.com/wandy-dev/{}',
   'ghl': 'https://github.com/lukesmithxyz/{}',

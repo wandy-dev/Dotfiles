@@ -62,6 +62,7 @@ font-3 = "FontAwesome:pixelsize=9antialias=false;0"
 font-4 = "DejaVuSans:pixelsize=9antialias=false;0"
 
 modules-left = i3 server-status xwindow
+modules-center = linux
 modules-right = gtd recording filesystem xbacklight volume weather memory cpu wlan expressvpn eth battery temperature date
 
 ;tray-position = right
@@ -111,8 +112,8 @@ font-3 = "FontAwesome:pixelsize=9;0"
 font-4 = "DejaVuSans:pixelsize=9antialias=false;0"
 
 modules-left = i3 xwindow
-modules-right = gtd build-status server-status date
-
+modules-right = gtd server-status date
+; fix this module later build-status
 ;tray-position = right
 tray-padding = 2
 ;tray-transparent = true
@@ -626,7 +627,7 @@ interval = 5
 type = custom/script
 label = "%{A1:notify-send "$(figlet "$(hostname)")":}%output%%{A}"
 ;label-underline = ${colors.primary}
-exec = echo "$(whoami)@$(hostname)"
+exec = echo ""
 
 [module/expressvpn]
 type = custom/script

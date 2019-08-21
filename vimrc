@@ -121,6 +121,7 @@ autocmd BufWinLeave * call clearmatches()
 nmap <C-p> :FZF<CR>
 nmap ; :Buffers<CR>
 nmap <C-f> :NERDTreeFind<CR>
+nmap <leader>o :tabe %\|set nonu<CR>
 vnoremap <C-c> "*y :let @+=@*<CR>
 nnoremap <leader>cf :let @+=expand("%")<CR>
 
